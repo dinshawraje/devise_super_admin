@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeviseSuperAdmin</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body class="metro">
+  <header>
+    <nav class="navigation-bar">
+      <div class="container">
+        <nav class="navigation-bar-content">
+          <div class="element">
+            <a href="#"><img src="/assets/syntonic_logo.png" width="145" height="34" border="0" style="margin-top:-3px;"></a>
+          </div>
+          <!--<a href="#" class="element1 pull-menu"></a>-->
+          <!--<ul class="element-menu">
+            <li><a href="#">Dashboard</a></li>
+            <li class="active"> <a href="employee.html">Employees</a> </li>
+            <li> <a href="#">Analytics</a></li>
+            <li> <a href="billing.html">Billing</a></li>
+            <li> <a href="customization.html">Help</a></li>
+          </ul>-->
+
+          <div class="element place-right padding_top20">
+            <a href="#" class="dropdown-toggle">
+              <span class="icon-cog"></span>
+            </a>
+            <ul data-role="dropdown" class="dropdown-menu light place-right">
+              <li> <a href="#" data-no-turbolink="true">Change Password</a> </li>
+            </ul>
+          </div>
+          <div class="element place-right padding_top20">
+            <%if current_user.present? %>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete, :class=>"fg-white text-bold") %>
+            <% else %>
+              <%= link_to('SignIn', new_user_session_path, :class=>"fg-white text-bold") %>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="grid">
+      <div class="row">
+        <div class="grid fluid">
+          <div class="row margin_T20">
+            <div class="span6"> <img src="/assets/orange_logo.png" class="place-left" > </div>
+            <div class="span6">
+              <p class="place-right text_orange">
+                <%if current_user.present? %>
+                    Hello, <%= current_user.email %>
+                <% else %>
+                    Please login
+                    <%= link_to('Login', new_user_session_path)  %>
+                    or
+                    <%= link_to('SignUp', new_user_registration_path)  %>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="grid fluid">
+          <div class="row">
+            <% if current_user.present? %>
+              <a href="#" class="button large btn_blue text-bold text_upper padd_TL margin_B10 place-right">Add Company</a>
+            <% else %>
+              <h2 class="text_blue ptsan_bold margin_B10">Portal Administration</h2>
+            <% end %>
+          </div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

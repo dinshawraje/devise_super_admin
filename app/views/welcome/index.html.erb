@@ -1,0 +1,62 @@
+
+<div class="row bg-white">
+  <div id="scrollbox2" data-role="scrollbox2" data-scroll="vertical" class="scrollbar bg-white">
+    <table id="manage_emp_datatable" class="display table border striped" width="100%" cellspacing="0">
+      <thead>
+      <tr>
+        <th class="text-left no-border">Customer</th>
+        <th class="text-left no-border">View Portal</th>
+        <th class="text-left no-border">Status</th>
+        <th class="text-center no-border">Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="#">Farmer's Insurance</a></td>
+          <td>Enterprise</td>
+          <td>Active</td>
+          <td class="text-center"><a href="#"><i class="icon-pencil fg-gray"></i></a></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="input-control checkbox">
+      <label>
+        <input type="checkbox" />
+        <span class="check border_radius_zero"></span> Show deleted customer </label>
+    </div>
+  </div>
+  <script>
+      $(document).ready(function() {
+          var table = $('#manage_emp_datatable').DataTable();
+
+          $('#manage_emp_datatable tbody').on( 'click', 'tr', function () {
+              if ( $(this).hasClass('selected') ) {
+                  $(this).removeClass('selected');
+              }
+              else {
+                  table.$('tr.selected').removeClass('selected');
+                  $(this).addClass('selected');
+              }
+          } );
+
+          $('#button').click( function () {
+              table.row('.selected').remove().draw( false );
+          } );
+      } );
+  </script>
+</div>
+</div>
+
+
+<script>
+$( document ).ready(function() {
+$("#scrollbox2").scrollbar({
+    height: 400,
+    axis: 'y'
+});
+
+});
+</script>
